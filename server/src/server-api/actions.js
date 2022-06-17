@@ -1,0 +1,37 @@
+const PING = 0;
+const ACCESS_DENIED = 1;
+
+const LOAD_PLAYER_NAME_TAKEN = 2;
+const LOAD_PLAYER_ALREADY_CONNECTED = 3;
+const LOAD_PLAYER = 4;
+const LOAD_ADMIN = 5;
+const LOAD_GEAR = 6;
+const LOAD_FAIL_KICK = 7;
+
+const STRIP_GEAR = 8;
+const SAVE_PLAYER_AND_GEAR = 9;
+
+const BANK_WITHDRAW = 10;
+const BANK_DEPOSIT = 11;
+const house_true=103;
+const house_false=104;
+const LOADCHEST=991119
+const SAVECHEST=991120
+export {
+  PING,
+  ACCESS_DENIED,
+  LOAD_PLAYER_NAME_TAKEN,
+  LOAD_PLAYER_ALREADY_CONNECTED,
+  LOAD_PLAYER,
+  LOAD_ADMIN,
+  LOAD_GEAR,
+  LOAD_FAIL_KICK,
+  STRIP_GEAR,
+  SAVE_PLAYER_AND_GEAR,
+  BANK_WITHDRAW,
+  BANK_DEPOSIT,
+  house_true,
+  house_false,
+  LOADCHEST,
+  SAVECHEST
+};

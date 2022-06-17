@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "workspaces": [
+    "client",
+    "gameservers",
+    "log-engine",
+    "server",
+    "shared"
+  ],
+  "scripts": {
+    "start": "cd server && npm run start",
+    "build": "cd server && npm run build && cd ../client && npm run build",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run start\""
+  }
+}
