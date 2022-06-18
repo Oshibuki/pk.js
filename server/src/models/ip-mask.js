@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+import mongooseSequence from 'mongoose-sequence';
+const AutoIncrement = mongooseSequence(mongoose);
 
 const IPMaskSchema = new mongoose.Schema({
   id: { type: Number, require: true },

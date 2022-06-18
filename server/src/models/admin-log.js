@@ -24,6 +24,6 @@ const AdminLog = new mongoose.Schema({
   name: String
 });
 
-AdminLog.plugin(paginate);
+AdminLog.plugin(paginate.default);
 
 export default mongoose.model('AdminLog', AdminLog);

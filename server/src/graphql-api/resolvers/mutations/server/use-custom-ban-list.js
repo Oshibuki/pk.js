@@ -6,6 +6,8 @@ import {
 } from '../../../../utils/server-config-parser';
 import path from 'path';
 import fs from 'fs';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 export default async (parent, args, context) => {
   /* Check for Permissions */

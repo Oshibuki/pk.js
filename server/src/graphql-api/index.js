@@ -18,7 +18,8 @@ export default new ApolloServer({
   schema,
   context: async ({ ctx }) => {
     try {
-      const user = jwt.verify(ctx.get('JWT'), serverConfig.jwtAuth.secret, {
+      ctx.cookies.get('token')
+      const user = jwt.verify(ctx.cookies.get('token'), serverConfig.jwtAuth.secret, {
         algorithms: [serverConfig.jwtAuth.algorithm]
       }).user.steamID;
 
