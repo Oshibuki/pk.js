@@ -13,15 +13,7 @@ import Layout from '../layout/layout';
 
 class Login extends React.Component {
   async componentDidMount() {
-    // check whether user is being redirect from login and process if the case
-    // const urlParams = new URLSearchParams(window.location.search);
-    // if(urlParams.get('code') !== null){
-    //   await Auth.attemptAuth(window.location.search);
-    //   this.props.history.replace('/login');
-    //   this.setState({});
-    // }
     //使用cookie判断是否登录用户
-    console.log(document.cookie)
     let cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1");
     if (cookieToken) {
       await Auth.attemptAuth(cookieToken);
