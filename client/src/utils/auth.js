@@ -1,31 +1,28 @@
 import jwtDecode from 'jwt-decode';
 
-import httpClient from './http-client';
-
-
 class Auth {
-  constructor(){
+  constructor() {
     this.flush();
   }
 
-  flush(){
+  flush() {
     this.isLoggedIn = false;
     this.jwtToken = null;
     this.saveToken = null;
     this.claim = null;
   }
 
-  logout(){
+  logout() {
     this.flush();
     localStorage.removeItem('JWT');
   }
 
-  storeToken(){
+  storeToken() {
     localStorage.setItem('JWT', this.jwtToken);
   }
 
-  restoreAuth(){
-    if(localStorage.getItem('JWT') === null) return false;
+  restoreAuth() {
+    if (localStorage.getItem('JWT') === null) return false;
     const token = localStorage.getItem('JWT');
 
     this.isLoggedIn = true;
@@ -35,14 +32,12 @@ class Auth {
     return true;
   }
 
-  async attemptAuth(queryString){
+  async attemptAuth(cookieToken) {
     this.flush();
 
-    const response = await httpClient.get('/auth/steam/return' + queryString);
-
     this.isLoggedIn = true;
-    this.jwtToken = response.data.token;
-    this.claim = jwtDecode(response.data.token).user;
+    this.claim = jwtDecode(cookieToken).user;
+    this.jwtToken = cookieToken;
   }
 
 }

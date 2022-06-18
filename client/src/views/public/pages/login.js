@@ -1,10 +1,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { 
-  Button, 
-  Card, 
-  CardHeader, 
-  Col 
+import {
+  Button,
+  Card,
+  CardHeader,
+  Col
 } from 'reactstrap';
 
 import Auth from '../../../utils/auth';
@@ -14,15 +14,23 @@ import Layout from '../layout/layout';
 class Login extends React.Component {
   async componentDidMount() {
     // check whether user is being redirect from login and process if the case
-    const urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.get('openid.claimed_id') !== null){
-      await Auth.attemptAuth(window.location.search);
+    // const urlParams = new URLSearchParams(window.location.search);
+    // if(urlParams.get('code') !== null){
+    //   await Auth.attemptAuth(window.location.search);
+    //   this.props.history.replace('/login');
+    //   this.setState({});
+    // }
+    //使用cookie判断是否登录用户
+    console.log(document.cookie)
+    let cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    if (cookieToken) {
+      await Auth.attemptAuth(cookieToken);
       this.props.history.replace('/login');
       this.setState({});
     }
   }
 
-  renderLoading(){
+  renderLoading() {
     return (
       <Layout>
         <Col lg="5" md="7">
@@ -41,7 +49,7 @@ class Login extends React.Component {
     );
   }
 
-  renderLoginForm(){
+  renderLoginForm() {
     return (
       <Layout>
         <Col lg="5" md="7">
@@ -54,15 +62,15 @@ class Login extends React.Component {
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  href="/auth/steam"
+                  href="/auth/microsoft"
                 >
-                      <span className="btn-inner--icon">
-                        <img
-                          alt="..."
-                          src={require("assets/img/icons/common/steam.svg")}
-                        />
-                      </span>
-                  <span className="btn-inner--text">Steam</span>
+                  <span className="btn-inner--icon">
+                    <img
+                      alt="..."
+                      src={require("assets/img/icons/common/microsoft.svg")}
+                    />
+                  </span>
+                  <span className="btn-inner--text">Microsoft</span>
                 </Button>
               </div>
             </CardHeader>
@@ -72,13 +80,13 @@ class Login extends React.Component {
     );
   }
 
-  saveToken(yes){
+  saveToken(yes) {
     Auth.saveToken = yes;
-    if(Auth.saveToken) Auth.storeToken();
+    if (Auth.saveToken) Auth.storeToken();
     this.setState({});
   }
 
-  renderRememberMe(){
+  renderRememberMe() {
     return (
       <Layout>
         <Col lg="5" md="7">
@@ -91,7 +99,7 @@ class Login extends React.Component {
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  onClick={() => {this.saveToken(false)}}
+                  onClick={() => { this.saveToken(false) }}
                 >
                   <i className="fas fa-times" />
                   <span className="btn-inner--text">No thanks!</span>
@@ -99,7 +107,7 @@ class Login extends React.Component {
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  onClick={() => {this.saveToken(true)}}
+                  onClick={() => { this.saveToken(true) }}
                 >
                   <i className="fas fa-check" />
                   <span className="btn-inner--text">Yes please!</span>
@@ -112,28 +120,28 @@ class Login extends React.Component {
     );
   }
 
-  render(){
+  render() {
     // not logged in,
     // show loading while validating login attempt if callback present
     // or when JWT is stored in localStorage
     const urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.get('openid.claimed_id') !== null ||
-      (localStorage.getItem('JWT') !== null && Auth.isLoggedIn === false)){
+    if (urlParams.get('code') !== null ||
+      (localStorage.getItem('JWT') !== null && Auth.isLoggedIn === false)) {
       return this.renderLoading();
     }
 
     // not logged in, show login form
-    if(!Auth.isLoggedIn){
+    if (!Auth.isLoggedIn) {
       return this.renderLoginForm();
     }
 
     // logged in, no remember me status, show remember me form
-    if(Auth.isLoggedIn && Auth.saveToken === null){
+    if (Auth.isLoggedIn && Auth.saveToken === null) {
       return this.renderRememberMe();
     }
 
     // logged in, select location to go to
-    if(Auth.isLoggedIn && Auth.saveToken !== null){
+    if (Auth.isLoggedIn && Auth.saveToken !== null) {
       return <Redirect to="/" />;
     }
   }
