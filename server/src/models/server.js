@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
+import mongooseSequence from 'mongoose-sequence';
+const AutoIncrement = mongooseSequence(mongoose);
 
 import serverConfig from '../../server-config';
-
-const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const ServerSchema = new mongoose.Schema({
   id: { type: Number, require: true },
@@ -43,9 +43,16 @@ const ServerSchema = new mongoose.Schema({
     default: () => crypto.randomBytes(20).toString('hex')
   },
 
-  gameserverLastModule: String,
-  gameserverLastConfig: String,
-
+  gameserverLastModule: {
+    type: String,
+    require: true,
+    default: "Persistent Kingdoms 1.3.2.1"
+  },
+  gameserverLastConfig: {
+    type: String,
+    require: true,
+    default: "PK_cfg.txt"
+  },
   gameserverRestartCron: {
     type: String,
     default: serverConfig.gameserverRestartCron

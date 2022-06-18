@@ -1,4 +1,4 @@
 import passport from './passport';
-import SteamAuth from './steam-auth';
+import MicrosoftAuth from './microsoft-auth'
 
-export { passport, SteamAuth };
+export { passport, MicrosoftAuth };

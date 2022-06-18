@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 import { Server } from '../models';
 

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { UserInputError } from 'apollo-server-koa';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 import { AdminPermission, Server } from '../../../../models';
 import { validatorServerName } from 'shared/validators';
