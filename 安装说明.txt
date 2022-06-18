@@ -1,3 +1,5 @@
+-3.Azure api申请教程：https://docs.microsoft.com/en-us/azure/app-service/scenario-secure-app-authentication-app-service。注意用户对象设置为所有组织成员和个人
+
 -2.游戏服务器端口号为：serverConfig.gameserverPortStart + (serverID - 1) * 2;
 
 -1.准备一台linux系统的服务器
