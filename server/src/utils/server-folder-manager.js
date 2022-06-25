@@ -1,10 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import cprp from 'cpr-promise';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 import { buildConfig, parseConfig } from './server-config-parser';
 import serverConfig from '../../server-config';
 import del from 'del';
+
+
 
 const installServer = async server => {
   /* Create Server in Gameservers folder */

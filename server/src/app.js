@@ -12,9 +12,9 @@ import views from 'koa-views';
 
 import mongoose from 'mongoose';
 
-import jobContainer from './jobs';
+import jobContainer from './jobs/index';
 
-import { passport, SteamAuth } from './auth';
+import { passport, MicrosoftAuth } from './auth';
 
 import ApolloServer from './graphql-api';
 import ServerApi from './server-api';
@@ -24,7 +24,8 @@ const inProduction = serverConfig.env === 'production';
 
 mongoose.connect(serverConfig.mongoDB, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 
 const app = new Koa();
@@ -51,6 +52,8 @@ if (!inProduction) app.use(Logger());
 
 app.use(passport.initialize());
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 const clientPath = path.join(require.resolve('client'), '../');
 
 if (inProduction)
@@ -61,7 +64,7 @@ if (inProduction) app.use(views(path.join(path.join(clientPath, '/build'))));
 
 ApolloServer.applyMiddleware({ app });
 
-router.use('/auth', SteamAuth.routes(), SteamAuth.allowedMethods());
+router.use('/auth', MicrosoftAuth.routes(), MicrosoftAuth.allowedMethods());
 router.use('/serverapi', ServerApi.routes(), ServerApi.allowedMethods());
 
 if (inProduction) {

@@ -1,39 +1,43 @@
 import passport from 'koa-passport';
-import SteamStrategy from 'passport-steam';
-
+import {Strategy as MicrosoftStrategy} from 'passport-microsoft';
 import { SteamUser } from '../models';
 
 import serverConfig from '../../server-config';
 
 passport.use(
-  new SteamStrategy(
+  new MicrosoftStrategy(
     {
-      returnURL: serverConfig.host + '/login',
-      realm: serverConfig.host,
-      apiKey: serverConfig.steamAPIKey
+      clientID: serverConfig.Microsoft_CLIENT_ID,
+      clientSecret: serverConfig.Microsoft_CLIENT_SECRET,
+      callbackURL: "http://localhost/auth/microsoft/return",
+      scope: ['user.read'],
+      tenant: 'common',
+      authorizationURL: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      tokenURL: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
     },
-    async (indetifier, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       const user = {
         steamID: profile.id,
         displayName: profile.displayName,
-        avatar: profile.photos[0].value,
-        avatarMedium: profile.photos[1].value,
-        avatarFull: profile.photos[2].value,
+        avatar: "https://xsgames.co/randomusers/avatar.php?g=male",
+        avatarMedium: "https://xsgames.co/randomusers/avatar.php?g=male",
+        avatarFull: "https://xsgames.co/randomusers/avatar.php?g=male",
         $setOnInsert: { panelAdmin: (await SteamUser.count({})) === 0 }
       };
 
       await SteamUser.findOneAndUpdate(
         {
-          steamID: user.steamID
+          steamID:  user.steamID
         },
         user,
         {
           upsert: true,
           setDefaultsOnInsert: true
+        },
+        (err, user) => {
+          return done(err, user);
         }
       );
-
-      return done(null, user);
     }
   )
 );

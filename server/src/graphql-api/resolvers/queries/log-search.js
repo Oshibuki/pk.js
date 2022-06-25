@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { spawn } from 'child_process';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 export default {
   Server: {
@@ -12,7 +14,7 @@ export default {
       if (!fs.existsSync(currentGameserverPath))
         throw new Error('Server folder does not exist!');
 
-      const logFolderPath = path.join(currentGameserverPath, '/logs');
+      const logFolderPath = path.join(currentGameserverPath, '/Logs');
       if (!fs.existsSync(logFolderPath))
         throw new Error('Logs folder does not exist!');
 

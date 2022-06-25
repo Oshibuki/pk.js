@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 import { AdminPermission, Server } from '../../../../models';
 

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { Server, Ban, IPRecord } from '../models';
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
 
 async function updateBanList(server) {
   const currentGameserverPath = path.join(
