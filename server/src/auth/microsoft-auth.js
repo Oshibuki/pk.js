@@ -19,7 +19,7 @@ router.get(
     // ctx.body = JSON.stringify({
     //   token: token
     // });
-    ctx.cookies.set("token",token,{ httpOnly: false, secure: false, sameSite: "strict", secureProxy: false });
+    ctx.cookies.set("token",token,{ httpOnly: false, secure: false, sameSite: "strict", secureProxy: false,maxAge:31536000*1000 });
     ctx.redirect('/login')
   }
 );
