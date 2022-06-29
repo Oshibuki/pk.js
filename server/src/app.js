@@ -48,7 +48,7 @@ app.use(
   })
 );
 
-if (!inProduction) app.use(Logger());
+app.use(Logger());
 
 app.use(passport.initialize());
 
