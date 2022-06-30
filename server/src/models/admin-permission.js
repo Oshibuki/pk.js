@@ -21,6 +21,7 @@ const AdminPermission = new mongoose.Schema({
   admin: { type: String, require: true },
   player: { type: String, require: true },
 
+  banAttack: { type: Number },
   ...addPermissions()
 });
 
