@@ -7,7 +7,9 @@ import savePlayer from './save-player';
 import stripGear from './strip-gear';
 import checkhouse from './checkhouse'
 import loadChest from './load-chest'
-import saveChest from './save-chest'
+import saveChest from './save-chest';
+import saveFactionPrefix from './save-faction-prefix';
+import giftBox from './gift-box';
 export {
   bankDeposit,
   bankWithdraw,
@@ -18,5 +20,8 @@ export {
   stripGear,
   checkhouse,
   loadChest,
-  saveChest
+  saveChest,
+  // OrientSea
+  saveFactionPrefix,
+  giftBox,
 };
