@@ -13,6 +13,8 @@ import SteamUser from './steam-user';
 import Warning from './warning';
 import House from './house';
 import Chest from './chest';
+import FactionPrefixSchema from './faction-prefix';
+import giftItem from './gift-item';
 export {
   AdminLog,
   AdminPermission,
@@ -28,5 +30,7 @@ export {
   SteamUser,
   Warning,
   House,
-  Chest
+  Chest,
+  FactionPrefixSchema,// OrientSea: Faction_Prefix 
+  giftItem,
 };

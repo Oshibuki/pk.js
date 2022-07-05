@@ -46,7 +46,7 @@ const ServerSchema = new mongoose.Schema({
   gameserverLastModule: {
     type: String,
     require: true,
-    default: "Persistent Kingdoms 1.3.2.1"
+    default: "Persistent Kingdoms 1.3.3"
   },
   gameserverLastConfig: {
     type: String,

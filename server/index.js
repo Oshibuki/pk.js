@@ -11,4 +11,4 @@ import server from './src/app.js';
 server.listen(port, () =>
   console.log(`Server started on port ${port}`)
 );
-server.timeout = 2400;
+server.timeout = 240000;
