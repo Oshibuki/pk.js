@@ -141,6 +141,7 @@ export default async function (ctx) {
     let num = Math.floor(Math.random() * EMPTY_CHEST[1]);
     if (num <= EMPTY_CHEST[0]) {
         returnBlock.push(0);
+        ctx.body = returnBlock;
         return;
     }
 
