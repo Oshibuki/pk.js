@@ -13,10 +13,19 @@ const SAVE_PLAYER_AND_GEAR = 9;
 
 const BANK_WITHDRAW = 10;
 const BANK_DEPOSIT = 11;
-const house_true=103;
-const house_false=104;
-const LOADCHEST=991119
-const SAVECHEST=991120
+const house_true = 103;
+const house_false = 104;
+
+// OrienSea: Faction prefix
+const SAVE_FACTION_PREFIX = 107;
+const LOAD_FACTION_PREFIX = 108;
+const SAVE_FACTION_PREFIX_FAILED = 109;
+
+// OrientSea : Gift BOX
+const GIFT_BOX = 110;
+
+const LOADCHEST = 991119
+const SAVECHEST = 991120
 export {
   PING,
   ACCESS_DENIED,
@@ -33,5 +42,11 @@ export {
   house_true,
   house_false,
   LOADCHEST,
-  SAVECHEST
+  SAVECHEST,
+
+  SAVE_FACTION_PREFIX,
+  LOAD_FACTION_PREFIX,
+  SAVE_FACTION_PREFIX_FAILED,
+
+  GIFT_BOX,
 };
